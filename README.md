@@ -15,6 +15,12 @@ This repo contains the minimum steps to run tensorflow object detection training
     - transform raw_annotated_data to TFExamples/TFRecords format for tensorflow training
   - models/
     - we can test different model by adding more directories here.  The first one is ssd_inception_v2_coco_11_06_2017_udacity_real
+  - models/ssd_inception_v2_coco_11_06_2017_udacity_real
+    - untar the tensorflow pre-trained model here
+    - models/ssd_inception_v2_coco_11_06_2017_udacity_real/train
+      - set the model training output directory to here in the model's config file
+    - models/ssd_inception_v2_coco_11_06_2017_udacity_real/eval
+      - set the model evaluation output directory to here in the model's config file
   - training_data/
     - contains outputs from generate_tfrecords.py
   - ssd_inception_v2_udacity_real_train.sh
@@ -28,6 +34,8 @@ This repo contains the minimum steps to run tensorflow object detection training
     - contains a few driving images from the simulator to test the inference model
   - predictor.py
     - based on tensorflow's object_detection sample, this code takes an object detection inference model and output the prediction
+  - CHANGELOG.md
+    - We share out progress here as we go.
 
 
 
@@ -48,22 +56,6 @@ To train using different models
 5. Change or create your own export_graph.sh to generate the inference model directory. 
 
 6. Change or improve predictor.py to test your model.
-
-
-
-#### Progress Update
-
-- 10/22/17
-
-  - alec
-
-    - limited training on a macbook pro using ssd_inception_v2_coco_1106_2017 as a end-to-end test from training to prediction
-
-      - decreased batch_size from 24 to 12 in order to fit into the macbook pro's gpu
-
-      - trained up to 410 steps and stopped.  Loss fluctuates around 2.0
-
-        ​
 
 
 
