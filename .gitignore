@@ -1,0 +1,4 @@
+# exclude everything
+train/*
+.DS_Store
+*.pyc
