@@ -36,6 +36,13 @@ This repo contains the minimum steps to run tensorflow object detection training
     - based on tensorflow's object_detection sample, this code takes an object detection inference model and output the prediction
   - CHANGELOG.md
     - We share out progress here as we go.
+- Set the PYTHONPATH
+
+
+```shell
+# run this at the path/tldetect directory
+export PYTHONPATH=`pwd`:$PYTHONPATH 
+```
 
 
 
