@@ -20,7 +20,8 @@ NUM_CLASSES = 4
 
 PATH_TO_TEST_IMAGES_DIR = 'test_images_real'
 TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0000.jpg'),
-                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0285.jpg')]
+                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0285.jpg'),
+                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0350.jpg')]
 
 detection_graph = tf.Graph()
 
