@@ -33,20 +33,25 @@ def create_tf_example(metadict, file_path):
   width, height = image.size
 
   image_filename = metadict['filename'].encode('utf8')
-  image_format = b'jpg'
+  image_format = 'jpg'.encode('utf8')
 
   xmins = []
   xmaxs = []
   ymins = []
   ymaxs = []
+  classes_text = []
+  classes = []
+
   for annotation in metadict['annotations']:
     xmins.append(annotation['xmin'] / width)
     xmaxs.append((annotation['xmin'] + annotation['x_width']) / width)
     ymins.append(annotation['ymin'] / height)
     ymaxs.append((annotation['ymin'] + annotation['y_height']) / height)
+    classes_text.append(annotation['class'].encode('utf8'))
+    classes.append(class_text_to_int(annotation['class']))
 
-  classes_text = [metadict['class'].encode('utf8')]
-  classes = [class_text_to_int(metadict['class'])]
+  #print(metadict['annotations'])
+  #print(classes_text, classes)
 
   tf_example = tf.train.Example(features=tf.train.Features(feature={
       'image/height': dataset_util.int64_feature(height),
