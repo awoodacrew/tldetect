@@ -1,5 +1,13 @@
 #### Change Log
 
+- 10/25/17
+
+  - finished training ssd_inception_v2 model with udacity real images
+  - pushed the frozen_graph to github
+  - added a juypter notebook to run the inference model with test images and shows the predicted classifcation with bounding boxes on the image
+  - changed predictor.py to run through predictions with a series of images and output each prediction as a csv row
+    - each prediction currently takes around 250ms on my macbook pro 2014 with a GeForce GT 750M GPU
+
 - 10/24/17
 
   - alec
