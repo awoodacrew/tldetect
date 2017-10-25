@@ -12,7 +12,7 @@ from PIL import Image
 # What model to use
 MODEL_NAME = 'ssd_inception_v2_coco_11_06_2017_udacity_real_inference_graph'
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
-PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
+PATH_TO_CKPT = "./frozen_graphs/" + MODEL_NAME + '/frozen_inference_graph.pb'
 
 # List of the strings that is used to add correct label for each box.
 PATH_TO_LABELS = os.path.join('training_data', 'tl_label_map.pbtxt')
