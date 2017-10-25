@@ -1,5 +1,6 @@
 import os
 import collections
+from glob import glob
 import numpy as np
 import tensorflow as tf
 from object_detection.utils import label_map_util
@@ -18,10 +19,13 @@ PATH_TO_LABELS = os.path.join('training_data', 'tl_label_map.pbtxt')
 
 NUM_CLASSES = 4
 
-PATH_TO_TEST_IMAGES_DIR = 'test_images_real'
-TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0000.jpg'),
-                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0285.jpg'),
-                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0350.jpg')]
+#PATH_TO_TEST_IMAGES_DIR = 'test_images_real'
+PATH_TO_TEST_IMAGES_DIR = '../../our-team/Capstone/data/traffic_light/loop_with_traffic_light/'
+TEST_IMAGE_PATHS = glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, '*.jpg'))
+
+#TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0000.jpg'),
+#                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0285.jpg'),
+#                    os.path.join(PATH_TO_TEST_IMAGES_DIR, 'left0350.jpg')]
 
 detection_graph = tf.Graph()
 
@@ -83,30 +87,40 @@ def predict(categories, category_index):
             [detection_boxes, detection_scores, detection_classes, num_detections],
             feed_dict={image_tensor: image_np_expanded})
         # Visualization of the results of a detection.
-        vis_util.visualize_boxes_and_labels_on_image_array(
-            image_np,
-            np.squeeze(boxes),
-            np.squeeze(classes).astype(np.int32),
-            np.squeeze(scores),
-            category_index,
-            use_normalized_coordinates=True,
-            line_thickness=8)
+        #vis_util.visualize_boxes_and_labels_on_image_array(
+        #    image_np,
+        #    np.squeeze(boxes),
+        #    np.squeeze(classes).astype(np.int32),
+        #    np.squeeze(scores),
+        #    category_index,
+        #    use_normalized_coordinates=True,
+        #    line_thickness=8)
 
-        print(os.path.basename(image_path))
-        print("\tBounding box for the highest score object (l,r,t,b):{}".format(extract_box(tuple(boxes[0].tolist()), image)))
-        # pick the highest score for now
-        for i in range(3):
-          score = scores[0][i]
-          class_index = int(classes[0][i])
+        print(os.path.basename(image_path), end=",")
+
+        top_score = scores[0][0]
+        if top_score < 0.5:
+          print("Unknown")
+        else:
+          class_index = int(classes[0][0])
           category = get_category(categories, class_index)
           if category is not None:
-            print("\tRank:{} label:{} class_index:{} prob:{:0.4f}".format(i, category['name'], class_index, score))
+            print("{},{}".format(category['name'], top_score))
 
-        counted = collections.Counter(classes.tolist()[0])
-        most_common_class_index=int(counted.most_common()[0][0])
-        category = get_category(categories, most_common_class_index)
-        if category is not None:
-          print("\tMost commonly identified label:{}".format(category['name']))
+        #print("\tBounding box for the highest score object (l,r,t,b):{}".format(extract_box(tuple(boxes[0].tolist()), image)))
+        #pick the highest score for now
+        #for i in range(3):
+        #  score = scores[0][i]
+        #  class_index = int(classes[0][i])
+        #  category = get_category(categories, class_index)
+        #  if category is not None:
+        #    print("\tRank:{} label:{} class_index:{} prob:{:0.4f}".format(i, category['name'], class_index, score))
+
+        #counted = collections.Counter(classes.tolist()[0])
+        #most_common_class_index=int(counted.most_common()[0][0])
+        #category = get_category(categories, most_common_class_index)
+        #if category is not None:
+        #  print("\tMost commonly identified label:{}".format(category['name']))
 
 
 def main(_):
