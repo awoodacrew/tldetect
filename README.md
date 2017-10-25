@@ -28,12 +28,17 @@ This repo contains the minimum steps to run tensorflow object detection training
   - export_graph.sh
     - a script to export a trained model for inference
     - the inference model will be in a directory with the name defined in the script
+  - frozen_graphs/
+    - contains the trained model as a frozen graph for inference
+    - each model & image type (real vs simulator) should be in its own directory
   - test_images_real/
     - contains a few real driving images to test the inference model
   - test_images_simulator/
     - contains a few driving images from the simulator to test the inference model
   - predictor.py
-    - based on tensorflow's object_detection sample, this code takes an object detection inference model and output the prediction
+    - based on tensorflow's object_detection sample, this code takes an object detection inference model and output the prediction in csv format
+  - Traffic Light Detection and Classification - Capstone Project.ipynb
+    - a Juypter notebook to test inference models and see the resulting images with the detected bounding boxes and predictions
   - CHANGELOG.md
     - We share out progress here as we go.
 - Set the PYTHONPATH
